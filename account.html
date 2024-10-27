@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account - Shopping | Ecommerce Website</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <a href="/index.html">
+                 <img src="/assets/images/logo.png" alt="logo" width="180px">
+                </a>
+            </div>
+            <nav>
+                <ul id ="MenuItem">
+                    <li><a href="/index.html">Home</a></li>
+                    <li><a href="/products.html">Products</a></li>
+                    <li><a href="/About.html">About</a></li>
+                    <li><a href="/contact.html">Contacts</a></li>
+                    <li><a href="/account.html">Account</a></li>
+                </ul>
+            </nav>
+            <a href="/cart.html"> 
+                <img src="/assets/images/cart.png" alt="cart-icon" width="30px" height="30px">
+            </a>
+            <img src="/assets/images/menu.png" alt="menu-icon" width="30px" height="30px" class="menu-icon" onclick=openmenu() id="men">        </div>
+    </div>
+
+    <!-- account page -->
+
+    <div class="account-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-2">
+                    <img src="/assets/images/back1.png">
+                </div>
+                <div class="col-2">
+                    <div class="form-container">
+                        <div class="form-btn">
+                            <span onclick=login()>Login</span>
+                            <span onclick=register()>Register</span>
+                            <hr id="indi">
+                        </div>
+                        <form id="loginform">
+                            <input type="text" placeholder="Username" class="Username">
+                            <input type="password" placeholder="password" class="Password">
+                            <Button type="submit" class="btn" onclick="log()">Login</Button>
+                            <a href="">Forget Password</a>
+                        </form >
+                        <form id="Regform">
+                            <input type="text" placeholder="Username" class="Username">
+                            <input type="Email" placeholder="Email">
+                            <input type="password" placeholder="password" class="Password">
+                            <Button type="submit" class="btn" onclick="reg()">Register</Button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col-1">
+                    <h3>Download Our App</h3>
+                    <p>Download App For Android And Ios phone.</p>
+                    <div class="app-logo">
+                        <a href="https://play.google.com/store/games?hl=en_IN" target="_blank">
+                            <img src="/assets/images/play-store.png">
+                        </a>
+                        <a href="https://www.apple.com/in/app-store/" target="_blank">
+                            <img src="/assets/images/app-store.png">
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-col-2">
+                    <img src="/assets/images/logo.png" width="180px">
+                    <p>Our Purpose Is To Sustainably Make <br>the Pleasure and Benefits of Sports Accessible to
+                        the Many.
+                    </p>
+                </div>
+                <div class="footer-col-3">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li><a href="#">Coupons</a></li>
+                        <li><a href="#">Blogs Post</a></li>
+                        <li><a href="/rtnpolicy.html" target="_blank">Return Policy</a></li>
+                        <li><a href="#">Join Affiliate</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col-4">
+                    <h3>Follow Us</h3>
+                    <ul>
+                        <li><a href="https://www.facebook.com/" target="_blank">Facebook</a></li>
+                        <li><a href="https://www.twitter.com/" target="_blank">Twitter</a></li>
+                        <li><a href="https://www.instagram.com/akmalkhann0/" target="_blank">Instagram</a></li>
+                        <li><a href="https://www.youtube.com/" target="_blank">Youtube</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">© Copyright 2024 - Binary Duo</p>
+            <p class="copyright">Developed by <a href="https://www.linkedin.com/in/akmalkhan0/" target="_blank">Akmal Khan</a> &
+                <a href="https://www.linkedin.com/in/musahidmansuri0/" target="_blank">Musahid Mansuri</a>
+            </p>
+        </div>
+    </div>
+    <script>
+         // Register new user
+  function reg() {
+    const username = document.getElementsByClassName("username").value;
+    const password = document.getElementsByClassName("password").value;
+  
+    if (localStorage.getItem(username)) {
+      alert("Username already taken!");
+    } else {
+      localStorage.setItem(username, password);
+      alert("Registered successfully! Please log in.");
+    }
+  }
+  
+  // Log in existing user
+  function log() {
+    const username = document.getElementsByClassName("username").value;
+    const password = document.getElementsByClassName("password").value;
+    const storedPassword = localStorage.getItem(username);
+  
+    if (storedPassword === password) {
+      alert("Login Successfully");
+    } else {
+     alert("Incorrect username or password!");
+    }
+  }
+  
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>

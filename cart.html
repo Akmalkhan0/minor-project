@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - Shopping | Ecommerce Website</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <a href="/index.html">
+                 <img src="/assets/images/logo.png" alt="logo" width="180px">
+                </a>
+            </div>
+            <nav>
+                <ul id ="MenuItem">
+                    <li><a href="/index.html">Home</a></li>
+                    <li><a href="/products.html">Products</a></li>
+                    <li><a href="/About.html">About</a></li>
+                    <li><a href="/contact.html">Contacts</a></li>
+                    <li><a href="/account.html">Account</a></li>
+                </ul>
+            </nav>
+            <a href="/cart.html"> 
+                <img src="/assets/images/cart.png" alt="cart-icon" width="30px" height="30px">
+            </a>
+            <img src="/assets/images/menu.png" alt="menu-icon" width="30px" height="30px" class="menu-icon" onclick=openmenu() id="men">        </div>
+    </div>
+
+    <!-- Cart Item Details -->
+    <div class="small-container cart-page" id="cart-page">
+        <table id="cart-table cart-container">
+            <thead>
+                <tr>
+                    <th>Products</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody id="cart-table-body">
+
+            </tbody>
+        </table>
+
+        <div class="total-price">
+            <table>
+                <tr>
+                    <td>Subtotal</td>
+                    <td>$194.00</td>
+                </tr>
+                <tr>
+                    <td>Tax</td>
+                    <td>$26.00</td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td>$220.00</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="alter-page" style="display: none; margin: 50px; padding: 50px; font-size: 30px; text-align: center;">
+        The Cart is Empty!
+    </div>
+
+    <!-- Footer -->
+     
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col-1">
+                    <h3>Download Our App</h3>
+                    <p>Download App For Android And Ios phone.</p>
+                    <div class="app-logo">
+                        <a href="https://play.google.com/store/games?hl=en_IN" target="_blank">
+                            <img src="/assets/images/play-store.png">
+                        </a>
+                        <a href="https://www.apple.com/in/app-store/" target="_blank">
+                            <img src="/assets/images/app-store.png">
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-col-2">
+                    <img src="/assets/images/logo.png" width="180px">
+                    <p>Our Purpose Is To Sustainably Make <br>the Pleasure and Benefits of Sports Accessible to
+                        the Many.
+                    </p>
+                </div>
+                <div class="footer-col-3">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li><a href="#">Coupons</a></li>
+                        <li><a href="#">Blogs Post</a></li>
+                        <li><a href="/rtnpolicy.html" target="_blank">Return Policy</a></li>
+                        <li><a href="#">Join Affiliate</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col-4">
+                    <h3>Follow Us</h3>
+                    <ul>
+                        <li><a href="https://www.facebook.com/" target="_blank">Facebook</a></li>
+                        <li><a href="https://www.twitter.com/" target="_blank">Twitter</a></li>
+                        <li><a href="https://www.instagram.com/akmalkhann0/" target="_blank">Instagram</a></li>
+                        <li><a href="https://www.youtube.com/" target="_blank">Youtube</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">© Copyright 2024 - Binary Duo</p>
+            <p class="copyright">Developed by <a href="https://www.linkedin.com/in/akmalkhan0/" target="_blank">Akmal Khan</a> &
+                <a href="https://www.linkedin.com/in/musahidmansuri0/" target="_blank">Musahid Mansuri</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+             function updateTotal() {
+            let subtotal = 0;
+            document.querySelectorAll('.cart-page table tbody tr[data-id]').forEach(row => {
+                const productSubtotal = parseFloat(row.querySelector('td:nth-child(3)').innerText.replace('$', '')) || 0;
+                subtotal += productSubtotal;
+            });
+            const tax = subtotal * 0.13;
+            const total = subtotal + tax;
+
+            document.querySelector('.total-price table tr:nth-child(1) td:nth-child(2)').innerText = `$${subtotal.toFixed(2)}`;
+            document.querySelector('.total-price table tr:nth-child(2) td:nth-child(2)').innerText = `$${tax.toFixed(2)}`;
+            document.querySelector('.total-price table tr:nth-child(3) td:nth-child(2)').innerText = `$${total.toFixed(2)}`;
+        }
+
+       
+
+         function removeFromCart(productId) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart = cart.filter(item => item.id !== productId);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCart();
+            updateTotal();
+
+        }
+
+      
+
+        function updateQuantity(productId, quantity) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                item.quantity = parseInt(quantity);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                displayCart();
+                updateTotal();
+
+            }
+        }
+
+        function displayCart() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartTableBody = document.getElementById('cart-table-body');
+            const cartPager = document.getElementById("cart-page");
+            const alterPager = document.getElementById("alter-page");
+
+            cartTableBody.innerHTML = ''; // Clear previous content
+
+            if (cart.length === 0) {
+
+                cartPager.style.display="none";
+                alterPager.style.display="block";
+            }
+
+            cart.forEach(item => {
+                const row = document.createElement('tr');
+                row.setAttribute('data-id', item.id);
+
+                row.innerHTML = `
+                    <td>
+                        <div class="cart-info">
+                            <img src="${item.imageUrl}" alt="${item.name}">
+                            <div>
+                                <p>${item.name}</p>
+                                <small>Price: $${item.price.toFixed(2)}</small>
+                                <br>
+                                <a href="#" class="remove-item" data-id="${item.id}" onclick="removeFromCart(${item.id})">Remove</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <input type="number" class="quantity" data-id="${item.id}" value="${item.quantity}" onchange="updateQuantity(${item.id}, this.value)">
+                    </td>
+                    <td>$${(item.price * item.quantity).toFixed(2)}</td>
+                `;
+
+                cartTableBody.appendChild(row);
+            });
+        }
+        
+        displayCart();
+        updateTotal();
+
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>
