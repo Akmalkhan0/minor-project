@@ -33,6 +33,7 @@ To run the project locally, follow these steps:
 3. Open the index.html file in your browser:
    ```bash
    open index.html
+  No additional dependencies or installations are required.
 # Folder Structure
    ```bash
    akmshopping/
