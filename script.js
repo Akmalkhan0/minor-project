@@ -1,3 +1,10 @@
+const link = document.createElement('link');
+link.rel = 'icon';
+link.type = 'image/x-icon';
+link.href = './assets/favicon.png'; 
+document.head.appendChild(link);
+
+
 const loginform = document.getElementById("loginform");
 const regform = document.getElementById("Regform");
 const tform = document.getElementById("indi");
@@ -74,4 +81,5 @@ function addToCart(productId, productName, productPrice, quant, imageUrl) {
 
     localStorage.setItem('cart', JSON.stringify(cart));
     alert(`${productName} has been added to your cart.`);
+
 }
